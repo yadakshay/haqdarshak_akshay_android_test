@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Haqdarshak_Akshay_Android_Test</string>
+    <string name="mobile_no">Mobile No:</string>
+    <string name="password">Password:</string>
+    <string name="submit_button">Submit</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="name">Name:</string>
+    <string name="sex">Sex:</string>
+    <string name="age">Age:</string>
+    <string name="email">Email Id:</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="invalidName">Invalid Name</string>
+    <string name="invalidEmail">Invalid Email Id</string>
+    <string name="invalidMobile">Invalid Mobile Number</string>
+    <string name="emptyFiled">Field cannot be empty</string>
+    <string name="invalidPassword">Min length should be 6 char</string>
+    <string name="invalidUsernamePassword">Invalid Username Or Password</string>
+    <string name="successAddedDb">Successfully created Account!</string>
+    <string name="usedMobileNo">This Mobile Number is already used</string>
+    <string-array name="sex_arrays">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="facebook_app_id">1597856506951355</string>
+    <string name="fb_login_protocol_scheme">fb1597856506951355</string>
+    <string name="past_max_attempts">3 incorrect attepts please try again after sometime</string>
+</resources>
