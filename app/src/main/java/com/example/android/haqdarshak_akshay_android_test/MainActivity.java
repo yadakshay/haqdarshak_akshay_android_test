@@ -24,12 +24,23 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     private RecyclerView rv;
+    Handler mUserInteractionHandler;
+    Runnable logsout;
+    long LOGOUT_TIME = 600000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         rv = (RecyclerView) findViewById(R.id.recyclerView);
+        mUserInteractionHandler = new Handler();
         getPosts();
+        logsout = new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        };
+        mUserInteractionHandler.postDelayed(logsout, LOGOUT_TIME);
     }
 
     private void getPosts(){
@@ -70,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        logout();    }
+        logout();
+    }
 
     private void logout(){
         LoginManager.getInstance().logOut();
@@ -95,5 +107,10 @@ public class MainActivity extends AppCompatActivity {
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
+    }
+    @Override
+    public void onUserInteraction(){
+        mUserInteractionHandler.removeCallbacks(logsout);
+        mUserInteractionHandler.postDelayed(logsout, LOGOUT_TIME);
     }
 }

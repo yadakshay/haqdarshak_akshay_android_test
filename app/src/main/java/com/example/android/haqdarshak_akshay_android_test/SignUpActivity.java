@@ -110,6 +110,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 , Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                         startActivity(intent);
+                        finish();
                     }else{
                         mobileField.setError(getResources().getString(R.string.usedMobileNo).toString());
                     }
