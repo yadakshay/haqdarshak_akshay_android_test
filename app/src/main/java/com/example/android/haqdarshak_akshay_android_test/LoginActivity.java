@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private int wrongLoginCount = 0;
     private Button signInButton;
     private TextView pastAttempsErrorView;
-    private final int WRONG_ATTEMPT_WAIT_LENGTH = 100000;
+    private final int WRONG_ATTEMPT_WAIT_LENGTH = 100000; //100 sec wait after 3 invalid attempts
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (savedInstanceState != null){
@@ -39,13 +39,13 @@ public class LoginActivity extends AppCompatActivity {
         signInButton = (Button) findViewById(R.id.signInButton);
         pastAttempsErrorView = (TextView) findViewById(R.id.pastAttempsError);
     }
-
+    //launch sign up activity on hitting sign up
     public void signUp(View view){
         Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(intent);
         finish();
     }
-
+    //called when username and pass word are submitted
     public void signIn(View view) {
         if (wrongLoginCount < 2) {
             String mobile = enterMob.getText().toString();
@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             }, WRONG_ATTEMPT_WAIT_LENGTH);
         }
     }
+    //helper method to verify username password
     private boolean checkUsernamePassword(String mob, String password){
         final SQLiteDatabase db = mDbHelper.getReadableDatabase();
         String selection = databaseContract.usersEntry.COLUMN_MOBILE + " = ?" + " AND " + databaseContract.usersEntry.USER_PASSWORD +" = ?";

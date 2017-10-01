@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Akshay on 01-10-2017.
+ * this is a custom adaper for the recyler view
  */
 
  public class customAdapter extends RecyclerView.Adapter<customAdapter.customViewHolder> {
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
         @Override
         public customAdapter.customViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            //inflate view and attach to parent
             Context context = parent.getContext();
             int layoutIdForListItem = R.layout.list_item;
             LayoutInflater inflater = LayoutInflater.from(context);
@@ -49,6 +51,7 @@ import java.util.ArrayList;
                 feedHolder = (TextView) itemView.findViewById(R.id.feedHolder);
                 dateHolder = (TextView) itemView.findViewById(R.id.dateHolder);
             }
+            //helper method for binding data
             void bind(int listIndex) {
                 feedHolder.setText(feedList.get(listIndex).get(0));
                 dateHolder.setText(feedList.get(listIndex).get(1));

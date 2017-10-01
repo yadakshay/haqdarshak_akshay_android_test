@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rv;
     Handler mUserInteractionHandler;
     Runnable logsout;
-    long LOGOUT_TIME = 600000;
+    long LOGOUT_TIME = 600000; //10 mins time for logout after inactivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +40,10 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         };
+        //for logging out when app is left idle for 10 min. resetting logic in onUserInteraction method
         mUserInteractionHandler.postDelayed(logsout, LOGOUT_TIME);
     }
-
+    // get posts from facebook
     private void getPosts(){
         new GraphRequest(
                 AccessToken.getCurrentAccessToken(), "/me/feed", null, HttpMethod.GET,
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         ).executeAsync();
     }
-
+    //helper method to extract feeds from raw data
     private ArrayList<ArrayList<String>> extractData(GraphResponse response) {
         ArrayList<ArrayList<String>> storyList = new ArrayList<>();
         try {
@@ -83,14 +84,14 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         logout();
     }
-
+    // logout of facebook
     private void logout(){
         LoginManager.getInstance().logOut();
         Intent login = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(login);
         finish();
     }
-
+    //exit after 2 back button presses
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -108,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+    // reset timer on interaction
     @Override
     public void onUserInteraction(){
         mUserInteractionHandler.removeCallbacks(logsout);

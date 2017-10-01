@@ -104,9 +104,25 @@
             android:layout_height="wrap_content"
             android:text="@string/sign_up_button"
             android:id="@+id/signUpButton"/>
-        <TextView
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"/>
+            android:padding="@dimen/padding_large"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password"
+                android:id="@+id/imageView"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/captureImage"
+                android:layout_margin="@dimen/padding_large"
+                android:text="Capture Image"
+                android:onClick="captureImage"/>
+        </LinearLayout>
+
     </LinearLayout>
 </FrameLayout>

@@ -12,14 +12,17 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
+/*
+* this activity is used for ligging in to face book
+*
+* */
 public class HomeActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private LoginButton loginButton;
     boolean doubleBackToExitPressedOnce = false;
     Handler mUserInteractionHandler;
     Runnable logsout;
-    long LOGOUT_TIME = 600000;
+    long LOGOUT_TIME = 600000; // 10 mins for logout after inactivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         loginButton.setTextColor(Color.WHITE);
         loginButton.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         loginButton.setCompoundDrawablePadding(0);
-
+        //callback for facebook login
         FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -51,6 +54,7 @@ public class HomeActivity extends AppCompatActivity {
 
         loginButton.setReadPermissions("email","user_posts");
         loginButton.registerCallback(callbackManager, callback);
+        //for logging out when app is left idle for 10 min. resetting logic in onUserInteraction method
         mUserInteractionHandler = new Handler();
         logsout = new Runnable() {
             @Override
@@ -68,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+    //to exit on pressing back button twice
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -85,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         }, 2000);
     }
-
+    //resetting time on interaction
     @Override
     public void onUserInteraction(){
         mUserInteractionHandler.removeCallbacks(logsout);
